@@ -1,0 +1,225 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+   <meta charset="UTF-8">
+   <title>Some Fun</title>
+   <meta name="description" content="DESCRIPTION">
+   <link rel="stylesheet" href="bootstrap.min.css">
+
+   <!--[if lt IE 9]>
+       <script src = "http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+     <![endif]-->
+
+
+   <style>
+     #errr {
+       font-size: 30px;
+       background-color: red;
+       width: 30px;
+       text-align: center;
+     }
+
+     #lett {
+       font-size: 30px;
+       background-color: red;
+       width: 30px;
+       text-align: center;
+
+     }
+
+     .container {
+       display: flex;
+       justify-content: center;
+     }
+
+     .notpast {
+       background-color: black;
+       color: white;
+       
+  
+     }
+
+     .past {
+       background-color: rgba(238, 241, 241, 0);
+       color: rgba(0, 17, 255, 0.247);
+      
+       
+     }
+
+     #lett {
+       border: 1px solid black;
+       width: 25px;
+       height: 35px;
+
+
+
+
+     }
+
+     .red {
+       background-color: rgba(255, 0, 0, 0.329);
+     }
+
+     .hide {
+       display:none;
+      height: 0;
+    overflow: hidden;
+    transition: 1s ease height;
+     }
+
+     .paste {
+       background-color: rgba(32, 33, 37, 0.26);
+       color: rgba(0, 0, 0, 0.11);
+     }
+
+     #paste {
+       margin: 30px;
+       
+     }
+     
+      
+     
+     .show{
+      
+      height: auto;
+     }
+     .transition{
+    
+     
+    transition:all 0.5s ease-in-out;
+    
+    
+     }
+   </style>
+ </head>
+
+ <body>
+   <div class="">
+    <!-- <p id="lett"></p>-->
+     <!--<p id="errr"></p>-->
+     <!--<p id="counter"></p>-->
+   </div>
+   <div class="jumbotron">
+   <div id="hide" class=" transition card text-white bg-success m-3  text-center hide ">
+     
+     <h1 class="startHide">Click to start</h1>
+     <h3 id="paste" class=" paste"></h3>
+    </div>
+   </div>
+   <div class=" text-center">
+   <input type="text" id="inputt" class="hide">
+   <input type="button" id="inpnewtext" value="Input New Text" class="btn btn-success">
+   <input type="button" id="cute" value="click here" class="btn btn-success hide">
+   </div>
+ </body>
+ <script type="text/javascript">
+   let cute = document.getElementById("cute");
+   let inpNewText = document.getElementById("inpnewtext");
+   let tex = document.getElementById("inputt");
+   inpNewText.addEventListener('click', () =>{
+     tex.classList.remove('hide');
+    cute.classList.remove('hide');
+    inpNewText.classList.add('hide');
+   });
+   cute.onclick = function () {
+     let hide = document.getElementById('hide');
+     let start = document.querySelector('.startHide');
+     let paste = document.getElementById('paste');
+     let tex = document.getElementById("inputt").value;
+     let tex1 = document.getElementById("inputt");
+     //let err = document.getElementById("errr");
+     let counter = -1;
+     let errors = 0;
+     let cout = document.getElementById('counter');
+     if (tex.length == 0) {
+       alert("Text missing")
+     };
+     cute.classList.add('hide');
+     inpNewText.classList.remove('hide');
+      let txe = tex.replace(/[’“”—–]/g, "'");
+      
+     let te = txe.split('');
+
+     let strin = "";
+     te.forEach((elll) => {
+       strin += `<span class="lol">${elll}</span>`
+
+     });
+     start.classList.remove('hide');
+     paste.classList.add('paste');
+     hide.classList.remove('hide');
+     paste.innerHTML = strin;
+     paste.addEventListener('click', () => {
+       paste.classList.remove('paste');
+       start.classList.add('hide');
+     })
+
+     tex1.classList.add('hide')
+
+
+
+
+     let span = document.querySelectorAll('.lol');
+     span[0].classList.add('notpast');
+
+
+
+     document.addEventListener('keydown', logKey);
+
+     function logKey(e) {
+
+       let keyy = e.key;
+
+
+
+
+       console.log(paste.classList);
+
+       counter++;
+       //cout.innerHTML = counter;
+
+       if (paste.className === "paste") {
+         counter--;
+         errors--;
+        
+       } else if (counter >= span.length - 1) {
+         paste.innerHTML = "Done";
+         counter = 0;
+         errors = 0;
+
+
+       } else if (keyy === 'Shift') {
+         counter--;
+         errors--;
+
+       } else if (txe[counter] != keyy) {
+         counter--;
+         span[counter + 1].classList.add('red');
+         errors++;
+         //err.innerHTML = errors;
+         console.log(errors + "errors");
+
+
+
+       } else {
+         //document.getElementById("lett").innerHTML = span[counter + 1].textContent;
+         span[counter].classList.add('past');
+         span[counter + 1].classList.add('notpast');
+         console.log(counter + "counter");
+
+
+       }
+
+
+     }
+
+
+   }
+ </script>
+
+
+
+
+
+ </html>
